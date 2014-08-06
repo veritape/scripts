@@ -13,7 +13,11 @@ Hace pedidos a la web de la OSCE para descargar personas registradas como
 proveedores del Estado.
 http://www.osce.gob.pe/consultasenlinea/rnp_consulta/ProveedoresInscritos.asp
 
-por ejemplo busca por RNP 00001.
+por ejemplo busca por RNP del 00001 al 00100:
+
+    ``python query_osce.py 1 100``
+
+Resultados seran grabados en archivo out_osce.tsv.
 '''
 
 _tor_proxies = {'http': 'socks5://127.0.0.1:9050',
