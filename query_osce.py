@@ -69,7 +69,7 @@ def extract_name(html):
     name = soup.find_all('td', 'TDData')
     if len(name) > 1:
         name = name[2].text
-        print name
+        print name.encode("utf-8")
         return name
     else:
         return None
