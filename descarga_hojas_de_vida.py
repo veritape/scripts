@@ -1,4 +1,4 @@
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import codecs
 import time
 import json
@@ -7,6 +7,11 @@ import sys
 
 from selenium import webdriver
 
+
+'''
+Descargaba hojas de vida de la web del JNE. Ya no funciona por que el JNE
+decidió encriptar los URL.
+'''
 
 
 firefoxpreferences = webdriver.FirefoxProfile()
@@ -28,31 +33,31 @@ def download(candidato_id, browser, outputfile):
 
     content = browser.find_element_by_xpath('//span[@id="txtCargoPostula"]')
     obj['cargo_postula'] = content.text
-    
+
     content = browser.find_element_by_xpath('//span[@id="txtLugarPostula"]')
     obj['lugar_postula'] = content.text
-    
+
     content = browser.find_element_by_xpath('//span[@id="txtFormaDesignacion"]')
     obj['forma_designacion'] = content.text
-    
+
     content = browser.find_element_by_xpath('//span[@id="txtDNI"]')
     obj['dni'] = content.text
-    
+
     content = browser.find_element_by_xpath('//span[@id="txtApellidoPaterno"]')
     obj['apellido_paterno'] = content.text
-    
+
     content = browser.find_element_by_xpath('//span[@id="txtApellidoMaterno"]')
     obj['apellido_materno'] = content.text
-    
+
     content = browser.find_element_by_xpath('//span[@id="txtNombres"]')
     obj['nombres'] = content.text
-    
+
     content = browser.find_element_by_xpath('//span[@id="txtFechaNacimiento"]')
     obj['fecha_nacimiento'] = content.text
-    
+
     content = browser.find_element_by_xpath('//span[@id="txtSexo"]')
     obj['sexo'] = content.text
-    
+
     content = browser.find_element_by_xpath('//span[@id="txtCorreoElectronico"]')
     obj['correo_electronico'] = content.text
 
@@ -67,19 +72,19 @@ def download(candidato_id, browser, outputfile):
 
     content = browser.find_element_by_xpath('//span[@id="txtDistritoNac"]')
     obj['distrito_nacimiento'] = content.text
-    
+
     content = browser.find_element_by_xpath('//span[@id="txtLugarResicencia"]')
     obj['lugar_residencia'] = content.text
-    
+
     content = browser.find_element_by_xpath('//span[@id="txtLugarDepartamentoRes"]')
     obj['lugar_departamento_residencia'] = content.text
-    
+
     content = browser.find_element_by_xpath('//span[@id="txtLugarProvinciaRes"]')
     obj['lugar_provincia_residencia'] = content.text
-    
+
     content = browser.find_element_by_xpath('//span[@id="txtLugarDistritoRes"]')
     obj['lugar_distrito_residencia'] = content.text
-    
+
     content = browser.find_element_by_xpath('//span[@id="txtTiempoRes"]')
     obj['lugar_tiempo_residencia'] = content.text
 
@@ -88,11 +93,12 @@ def download(candidato_id, browser, outputfile):
 
     content = browser.find_element_by_xpath('//span[@id="txtMadre"]')
     obj['nombres_de_madre'] = content.text
-    
+
     content = browser.find_element_by_xpath('//span[@id="txtConyuge"]')
     obj['nombres_de_conyuge'] = content.text
-    
+
     experiencia = []
+
     for i in browser.find_elements_by_xpath('//table[@id="tblExperiencia"]//*[td or th]'):
         if re.search("Centro de trabajo (.+) Sector", i.text):
             item = {}
