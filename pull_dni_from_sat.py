@@ -4,6 +4,11 @@ import sys
 import re
 
 
+'''
+Extrae DNIs presentes en lista de morosos del SAT.
+'''
+
+
 sat_file = "Notificacion_Deudas_Tributarias.txt"
 
 dni = []
