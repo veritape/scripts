@@ -1,4 +1,4 @@
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import codecs
 import re
 import sys
@@ -36,8 +36,8 @@ def compara_nombres(candidato, proveedor):
     return score
 
 
-#candidato = "TORRES  FRANCISCO ANTONIO"
-#proveedor = "CCI CONSTRUCCIONES S.A. SUCURSAL PERU"
+# candidato = "TORRES  FRANCISCO ANTONIO"
+# proveedor = "CCI CONSTRUCCIONES S.A. SUCURSAL PERU"
 
 # extrae candidatos nombres
 candidatos_nombres = []
@@ -64,4 +64,3 @@ for line in codecs.open(proveedores, "r", "utf-8").readlines():
                     out += "\nFound candidato proveedor:\t%s" % line.strip()
                     f.write(out)
                     print out.encode("utf-8")
-
