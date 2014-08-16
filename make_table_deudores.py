@@ -1,18 +1,20 @@
-#-*- coding: utf-8 -*-
-""" Parse tsv file output HTML table deudores"""
-
+# -*- coding: utf-8 -*-
 import collections
 import codecs
 import operator
 import sys
-
 import locale
+
+
+'''
+Parsea archivo TSV de deudores y crea tabla en HTML.
+'''
+
 
 locale.setlocale(locale.LC_ALL, "en_US.utf8")
 
-
-
 input_file = sys.argv[1].strip()
+
 
 def to_number(string):
     x = float(string)
@@ -50,7 +52,7 @@ for line in codecs.open(input_file, "r", "utf-8").readlines():
     out += "<td>" + line[6].title() + "</td>"
     out += "<td>" + line[7].title() + "</td>"
 
-    out += u"<td><a title='Link hacia página del MinJus' href='" 
+    out += u"<td><a title='Link hacia página del MinJus' href='"
     out += line[8] + "' target='_blank'>"
     out += line[1].upper() + ", " + line[2].upper() + "</a></td>"
 
@@ -64,15 +66,9 @@ for line in codecs.open(input_file, "r", "utf-8").readlines():
 
     out += "<td>" + line[18][:33] + "</td>"
 
-
     out += "</tr>\n"
 
 out += "</tbody></table>"
 out += "</div>"
 out += "</body></html>"
 print out.encode("utf-8")
-
-
-
-
-
