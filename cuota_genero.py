@@ -1,7 +1,12 @@
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import codecs
 import glob
 import subprocess
+
+
+'''
+Obtiene porcentaje femenino en listas de candidatos.
+'''
 
 
 filename = "hoja.tsv.0"
