@@ -10,13 +10,17 @@ from bs4 import BeautifulSoup
 
 
 '''
-Extrae nombres, apellidos, dni y monto que deben personas debido a juicio por
-alimentos. Info tomada de REDAM usando curl.
+Extrae nombres, apellidos, dni y monto que deben los ciudadanos por
+concepto de juicio por alimentos. Info tomada de REDAM usando curl.
+Este script actúa sobre archivos HTML.
 '''
+
+
 def to_number(string):
     x = string.replace(",", "")
     x = float(x)
     return x
+
 
 def extract_name(filename):
     this_id = filename.replace(".html", "")
@@ -46,4 +50,3 @@ for filename in glob.glob("*html"):
     obj = extract_name(filename)
     with codecs.open("deudores_redam.txt", "a", "utf-8") as f:
         f.write(json.dumps(obj) + "\n")
-
