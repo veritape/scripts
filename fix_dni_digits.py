@@ -1,7 +1,11 @@
-#-*- coding: utf-8 -*-
-
+# -*- coding: utf-8 -*-
 import sys
 import codecs
+
+
+'''
+Agrega los ceros faltantes a DNIs.
+'''
 
 
 filename = sys.argv[1].strip()
