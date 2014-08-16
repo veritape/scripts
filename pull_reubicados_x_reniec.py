@@ -1,5 +1,10 @@
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import codecs
+
+
+'''
+Busca candidatos reubicados por RENIEC en lista de candidatos.
+'''
 
 
 reniec_file = "dni_candidatos_reubicados_x_reniec.csv"
