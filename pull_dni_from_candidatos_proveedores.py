@@ -1,6 +1,11 @@
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import codecs
 import re
+
+
+'''
+Extrae DNI de candidatos proveedores.
+'''
 
 
 proveedores = []
@@ -9,7 +14,6 @@ for i in codecs.open("candidatos_proveedores.txt", "r", "utf-8"):
     i = i.replace(",", " ")
     i = re.sub("\s+", " ", i)
     proveedores.append(i)
-
 
 out = "DNI\tNOMBRE COMPLETO\n"
 for i in codecs.open("hoja.tsv.0", "r", "utf-8"):
