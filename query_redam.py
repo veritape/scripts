@@ -6,12 +6,12 @@ import sys
 
 from bs4 import BeautifulSoup
 import requests
+
+
 '''
 Hace pedidos a la web dela REDAM para descargar personas deudoras por
 cuestiones de alimentos.
 http://casillas.pj.gob.pe/redamWeb/index.faces
-
-
 '''
 
 _tor_proxies = {'http': 'socks5://127.0.0.1:9050',
@@ -23,19 +23,20 @@ _headers = {
 
 TIMEOUT = 3
 
+
 def get_by_dni(dni, TIMEOUT):
-payload = {
-    #"action": "enviar",
-    "form1:cboDocumentoTipo": "01",
-    "form1:textNumeroDocumento1": str(dni),
-    "form1:btnBuscarDeudor": "Buscar+Deudor",
-    "form1": "form1",
-}
-kargs = {
-    "data": payload,
-    "headers": _headers,
-    "timeout": TIMEOUT,
-}
+    payload = {
+        # "action": "enviar",
+        "form1:cboDocumentoTipo": "01",
+        "form1:textNumeroDocumento1": str(dni),
+        "form1:btnBuscarDeudor": "Buscar+Deudor",
+        "form1": "form1",
+    }
+    kargs = {
+        "data": payload,
+        "headers": _headers,
+        "timeout": TIMEOUT,
+    }
 
     url = "http://casillas.pj.gob.pe/redamWeb/index.faces"
     tor_req = req_socks.session()
