@@ -3,6 +3,11 @@ import codecs
 import sys
 
 
+'''
+Cruza info de partidos políticos de candidatos con sentencias.
+'''
+
+
 # file that needs org politica
 input_file = "hojas_3_4"
 
@@ -30,4 +35,3 @@ for i in codecs.open(input_file, "r", "utf-8").readlines():
     if found == "false":
             out = "ORGANIZACION POLITICA" + "\t" + i.strip()
             print out.encode("utf-8")
-
