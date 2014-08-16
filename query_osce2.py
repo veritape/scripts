@@ -82,8 +82,10 @@ def extract_name(html):
 # keep downloaded IDs in RAM
 descargados = []
 for i in codecs.open("out_osce.tsv", "r", "utf-8"):
-    i = i.strip().split()
-    descargados.append(i[0])
+    i = i.strip()
+    if not i.startswith("Time"):
+        i = i.split()
+        descargados.append(i[0])
 
 
 start_id = sys.argv[1].strip()
