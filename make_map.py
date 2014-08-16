@@ -1,7 +1,12 @@
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import codecs
 import re
 import sys
+
+
+'''
+Genera heatmap a partir de HTML template y list de coordenadas.
+'''
 
 
 input_file = sys.argv[1].strip()
