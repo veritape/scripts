@@ -4,8 +4,12 @@ import json
 import sys
 
 
-input_file = sys.argv[1].strip()
+'''
+Convierte datos del redam en JSON a TSV.
+'''
 
+
+input_file = sys.argv[1].strip()
 
 out = "DNI\tAPELLIDO PATERNO\tAPELLIDO MATERNO\tNOMBRES\tMONTO DEUDA\tURL\n"
 for i in codecs.open(input_file, "r", "utf-8"):
