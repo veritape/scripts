@@ -1,5 +1,8 @@
-#-*- coding: utf-8 -*-
-""" Parse tsv file extrae sentenciados que no han sido absueltos"""
+# -*- coding: utf-8 -*-
+'''
+Parse tsv file extrae sentenciados que no han sido absueltos
+'''
+
 
 import collections
 import codecs
@@ -69,8 +72,6 @@ def ranking_delitos(procesados):
     return counter.most_common(50)
 
 
-
-
 def make_table_procesados(procesados):
     procesados_s = sorted(procesados, key=operator.itemgetter('nombre'))
     out = "<table>"
@@ -89,7 +90,10 @@ def make_table_procesados(procesados):
     out += "</table>"
     return out
 
+
 """ Use a keyword para seleccionar delitos de interes """
+
+
 def make_table_de_tal_delito(procesados, keyword):
     procesados_s = sorted(procesados, key=operator.itemgetter('nombre'))
     out = "<table>"
