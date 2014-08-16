@@ -3,6 +3,11 @@ import codecs
 import sys
 
 
+'''
+Junta info de lugar que postula con lista de candidatos.
+'''
+
+
 # file that needs lugar postula
 input_file = "hojas_3_4"
 
@@ -15,7 +20,7 @@ for i in codecs.open(ref_file, "r", "utf-8").readlines():
         continue
     i = i.strip().split("\t")
     # list: dni, departamento, provincia, distrito al que postula
-    lista = [ i[0], i[1], i[2], i[3] ]
+    lista = [i[0], i[1], i[2], i[3]]
     lugar_que_postula.append(lista)
 
 for i in codecs.open(input_file, "r", "utf-8").readlines():
@@ -39,4 +44,3 @@ for i in codecs.open(input_file, "r", "utf-8").readlines():
         out += "DISTRITO POSTULA" + "\t"
         out += i.strip()
     print out.encode("utf-8")
-
