@@ -8,11 +8,11 @@ from bs4 import BeautifulSoup
 import requests
 
 
-'''
+"""
 Hace pedidos a la web dela REDAM para descargar personas deudoras por
 cuestiones de alimentos.
 http://casillas.pj.gob.pe/redamWeb/index.faces
-'''
+"""
 
 _tor_proxies = {'http': 'socks5://127.0.0.1:9050',
                 'https': 'socks5://127.0.0.1:9050'}
@@ -43,7 +43,7 @@ def get_by_dni(dni, TIMEOUT):
     tor_req.proxies = _tor_proxies
     try:
         r = requests.post(url, **kargs)
-        print r.text.encode("utf-8")
+        print(r.text.encode("utf-8"))
         sys.exit()
         name = extract_name(r.text)
         if name is not None:
@@ -65,7 +65,7 @@ def extract_name(html):
     name = soup.find_all('td', 'TDData')
     if len(name) > 1:
         name = name[2].text
-        print name.encode("utf-8")
+        print(name.encode("utf-8"))
         return name
     else:
         return None
