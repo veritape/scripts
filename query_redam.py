@@ -12,6 +12,9 @@ import requests
 Hace pedidos a la web dela REDAM para descargar personas deudoras por
 cuestiones de alimentos.
 http://casillas.pj.gob.pe/redamWeb/index.faces
+
+@input: file con lista de DNIs, uno por línea
+@ouput: json file
 """
 
 _tor_proxies = {'http': 'socks5://127.0.0.1:9050',
@@ -39,25 +42,15 @@ def get_by_dni(dni, TIMEOUT):
     }
 
     url = "http://casillas.pj.gob.pe/redamWeb/index.faces"
-    tor_req = req_socks.session()
-    tor_req.proxies = _tor_proxies
     try:
         r = requests.post(url, **kargs)
-        print(r.text.encode("utf-8"))
-        sys.exit()
+        print(r.json())
         name = extract_name(r.text)
         if name is not None:
             with codecs.open("out_redam.tsv", "a") as myfile:
-                myfile.write(number.encode("utf-8") + "\t")
                 myfile.write(name.encode("utf-8") + "\n")
-    except req_socks.exceptions.Timeout:
-        with codecs.open("out_redam.tsv", "a") as myfile:
-            out = "Timeout error %s" % number.encode("utf-8")
-            myfile.write(out + "\n")
-    except socket.timeout:
-        with codecs.open("out_redam.tsv", "a") as myfile:
-            out = "Timeout error %s" % number.encode("utf-8")
-            myfile.write(out + "\n")
+    except requests.exceptions.Timeout:
+        print("TIMEOUT at DNI: %s" % str(dni))
 
 
 def extract_name(html):
