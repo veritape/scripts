@@ -21,11 +21,15 @@ def to_number(string):
     return x
 
 
-def extract_name(filename):
-    this_id = filename.replace(".html", "")
-    html = codecs.open(filename, "r", "latin1").read()
+def extract_name(my_filename):
+    this_id = my_filename.replace(".html", "")
+    html = codecs.open(my_filename, "r", "latin1").read()
     soup = BeautifulSoup(html)
-    name = soup.find(id='form1:text155').get_text()
+    print(this_id)
+    try:
+        name = soup.find(id='form1:text155').get_text()
+    except AttributeError:
+        return None
     apellido_paterno = soup.find(id='form1:text156').get_text()
     apellido_materno = soup.find(id='form1:text157').get_text()
     dni = soup.find(id='form1:text158').get_text()
@@ -34,15 +38,15 @@ def extract_name(filename):
     for i in debe:
         dinero += to_number(i.get_text())
 
-    obj = dict()
-    obj['nombres'] = name
-    obj['apellido_paterno'] = apellido_paterno
-    obj['apellido_materno'] = apellido_materno
-    obj['dni'] = dni
-    obj['debe'] = dinero
-    obj['url'] = "http://casillas.pj.gob.pe/redamWeb/_rlvid.jsp.faces?_rap=pc_Index.obtenerDeudor&_rvip=/index.jsp&idDeudor=" + this_id
-    obj['vinculo'] = get_vinculo(soup)
-    return obj
+    item = dict()
+    item['nombres'] = name
+    item['apellido_paterno'] = apellido_paterno
+    item['apellido_materno'] = apellido_materno
+    item['dni'] = dni
+    item['debe'] = dinero
+    item['url'] = "http://casillas.pj.gob.pe/redamWeb/_rlvid.jsp.faces?_rap=pc_Index.obtenerDeudor&_rvip=/index.jsp&idDeudor=" + this_id
+    item['vinculo'] = get_vinculo(soup)
+    return item
 
 
 def get_vinculo(soup):
@@ -57,12 +61,15 @@ def get_vinculo(soup):
             vinculo = item.get_text()
         if 'Nombre' in item['id']:
             nombre_completo = item.get_text()
-            vinculos.append({'vinculo': vinculo, 'nombre_completo': nombre_completo})
+            dictionary = {'vinculo': vinculo, 'nombre_completo': nombre_completo}
+            if dictionary not in vinculos:
+                vinculos.append(dictionary)
 
-    return list({v['vinculo']: v for v in vinculos}.values())
+    return vinculos
 
 
 for filename in glob.glob("*html"):
     obj = extract_name(filename)
-    with codecs.open("deudores_redam.json", "a", "utf-8") as f:
-        f.write(json.dumps(obj) + "\n")
+    if obj is not None:
+        with codecs.open("deudores_redam.json", "a", "utf-8") as f:
+            f.write(json.dumps(obj) + "\n")
