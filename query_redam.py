@@ -35,22 +35,16 @@ def get_by_dni(dni, TIMEOUT):
         "form1:btnBuscarDeudor": "Buscar+Deudor",
         "form1": "form1",
     }
-    kargs = {
-        "data": payload,
-        "headers": _headers,
-        "timeout": TIMEOUT,
-    }
-
     url = "http://casillas.pj.gob.pe/redamWeb/index.faces"
-    try:
-        r = requests.post(url, **kargs)
-        print(r.json())
-        name = extract_name(r.text)
-        if name is not None:
-            with codecs.open("out_redam.tsv", "a") as myfile:
-                myfile.write(name.encode("utf-8") + "\n")
-    except requests.exceptions.Timeout:
-        print("TIMEOUT at DNI: %s" % str(dni))
+
+    s = requests.Session()
+    r = s.post(url, data=payload)
+    with open("a.html", "w") as handle:
+        handle.write(r.text)
+    name = extract_name(r.text)
+    if name is not None:
+        with codecs.open("out_redam.tsv", "a") as myfile:
+            myfile.write(name.encode("utf-8") + "\n")
 
 
 def extract_name(html):
@@ -68,4 +62,5 @@ dni_file = sys.argv[1].strip()
 
 for i in open(dni_file, "r").readlines():
     dni = i.strip()
+    print(dni)
     get_by_dni(dni, TIMEOUT)
