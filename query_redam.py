@@ -14,7 +14,8 @@ cuestiones de alimentos.
 http://casillas.pj.gob.pe/redamWeb/index.faces
 
 @input: file con lista de DNIs, uno por línea
-@ouput: json file
+
+NOT WORKING YET
 """
 
 _tor_proxies = {'http': 'socks5://127.0.0.1:9050',
