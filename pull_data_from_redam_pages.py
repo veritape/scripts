@@ -68,7 +68,7 @@ def get_vinculo(soup):
     return vinculos
 
 
-for filename in glob.glob("*html"):
+for filename in glob.glob("redam_html_files/*html"):
     obj = extract_name(filename)
     if obj is not None:
         with codecs.open("deudores_redam.json", "a", "utf-8") as f:
